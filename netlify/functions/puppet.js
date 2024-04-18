@@ -21,10 +21,15 @@ export async function handler(event, context) {
 
     await page.goto(url)
 
+    console.log("awaiting for title to be loaded")
+
     await page.waitForSelector('.title')
+
+    console.log("awaiting list of titles")
 
     const results = await page.$$eval('ul li', (articles) => {
       return articles.slice(0,5).map((link) => {
+        console.log("reading the next article...")
         return {
           title: link.querySelector('a').innerText,
           url: link.querySelector('a').href,
