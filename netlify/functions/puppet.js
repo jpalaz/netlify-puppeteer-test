@@ -8,6 +8,8 @@ chromium.setGraphicsMode = false
 
 export async function handler(event, context) {
   try {
+    console.log("Start processing. Launch browser...")
+
     const browser = await puppeteer.launch({
       args: chromium.args,
       defaultViewport: chromium.defaultViewport,
@@ -18,6 +20,8 @@ export async function handler(event, context) {
     })
 
     const page = await browser.newPage()
+
+    console.log("opening page...")
 
     await page.goto(url)
 
