@@ -1,5 +1,5 @@
-import chromium from '@sparticuz/chromium'
-import puppeteer from 'puppeteer-core'
+const chromium = require('@sparticuz/chromium')
+const puppeteer = require('puppeteer-core')
 
 const url = 'https://lite.cnn.com/'
 
