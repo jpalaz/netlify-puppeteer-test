@@ -10,12 +10,13 @@ export async function handler(event, context) {
   try {
     console.log("Start processing. Launch browser...")
 
+    const path = await chromium.executablePath()
+    console.log("chromium.executablePath = " + path)
+
     const browser = await puppeteer.launch({
       args: chromium.args,
       defaultViewport: chromium.defaultViewport,
-      executablePath: await chromium.executablePath(
-        "https://github.com/Sparticuz/chromium/releases/download/v123.0.1/chromium-v123.0.1-pack.tar"
-      ),
+      executablePath: path,
       headless: "new"
     })
 
