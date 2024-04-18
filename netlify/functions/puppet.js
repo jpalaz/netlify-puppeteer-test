@@ -6,20 +6,20 @@ const url = 'https://lite.cnn.com/'
 chromium.setHeadlessMode = true
 chromium.setGraphicsMode = false
 
+console.log("Start processing. Launch browser...")
+
+const path = await chromium.executablePath()
+console.log("chromium.executablePath = " + path)
+
+const browser = await puppeteer.launch({
+  args: chromium.args,
+  defaultViewport: chromium.defaultViewport,
+  executablePath: path,
+  headless: "new"
+})
+
 export async function handler(event, context) {
   try {
-    console.log("Start processing. Launch browser...")
-
-    const path = await chromium.executablePath()
-    console.log("chromium.executablePath = " + path)
-
-    const browser = await puppeteer.launch({
-      args: chromium.args,
-      defaultViewport: chromium.defaultViewport,
-      executablePath: path,
-      headless: "new"
-    })
-
     const page = await browser.newPage()
 
     console.log("opening page...")
