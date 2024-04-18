@@ -8,25 +8,28 @@ chromium.setGraphicsMode = false
 
 console.log("Start processing. Launch browser...")
 
-let browser = {}
+//let browser = {}
 
-async function setupBrowser() {
-  const path = await chromium.executablePath()
-  console.log("chromium.executablePath = " + path)
-
-  browser = await puppeteer.launch({
-    args: chromium.args,
-    defaultViewport: chromium.defaultViewport,
-    executablePath: path,
-    headless: "new"
-  })
-}
-
-setupBrowser()
-  .then(_ => console.log("Browser launched"))
+//async function setupBrowser() {
+//
+//}
+//
+//setupBrowser()
+//  .then(_ => console.log("Browser launched"))
 
 export async function handler(event, context) {
   try {
+    const path = await chromium.executablePath()
+    console.log("chromium.executablePath = " + path)
+
+    const browser = await puppeteer.launch({
+      args: chromium.args,
+      defaultViewport: chromium.defaultViewport,
+      executablePath: path,
+      headless: "new"
+    })
+    console.log("browser launched")
+
     const page = await browser.newPage()
 
     console.log("opening page...")
