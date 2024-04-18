@@ -24,7 +24,7 @@ export async function handler(event, context) {
     await page.waitForSelector('.title')
 
     const results = await page.$$eval('ul li', (articles) => {
-      return articles.map((link) => {
+      return articles.slice(0,5).map((link) => {
         return {
           title: link.querySelector('a').innerText,
           url: link.querySelector('a').href,
